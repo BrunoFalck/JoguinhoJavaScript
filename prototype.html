@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="carro.js"></script>
+</head>
+<body>
+    <script>
+        var meuCarro = new Carro('Vermelho', 140);
+        var oponente = new Carro('Azul', 200) 
+
+        meuCarro.acelerar();
+
+        document.writeln(meuCarro.cor + ' : ' + meuCarro.velocMaxima + 'km/h.');
+        document.write('<br>');
+        document.writeln(oponente.cor + ' : ' + oponente.velocMaxima + 'km/h.');
+        document.write('<br>');
+        document.write('Meu carro está a ' + meuCarro.velocAtual + 'km/h.');
+        document.write('<br>');
+        document.write('O carro do oponente está a ' + oponente.velocAtual + 'km/h.');
+    </script>
+</body>
+</html>
