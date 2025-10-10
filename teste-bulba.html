@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulbassauro Controlável</title>
+    <script src="animacao.js"></script>
+    <script src="bulba.js"></script>
+    <script src="teclado.js"></script>
+    <script src="spritesheet.js"></script>
+</head>
+<body>
+    <canvas id="canvas_nave" width="500" height="500"></canvas>
+    <script>
+        var canvas = document.getElementById('canvas_nave');
+        var context = canvas.getContext('2d');
+
+        var teclado = new Teclado(document);
+        var animacao = new Animacao(context);
+
+        var imgBulba = new Image();
+        imgBulba.src = 'img/bulba_spritesheet.png';
+        var bulba = new Bulba(context, teclado, imgBulba);
+        animacao.novoSprite(bulba);
+
+        imgBulba.onload = function() {
+            bulba.x = canvas.width / 2 - imgBulba.width / 2;
+            bulba.y = canvas.height - imgBulba.height;
+            bulba.velocidade = 5;
+            animacao.ligar();
+        };
+    </script>
+</body>
+</html>
