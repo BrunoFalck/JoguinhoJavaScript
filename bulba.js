@@ -43,5 +43,9 @@ Bulba.prototype = {
     },
     desenhar: function() {
         this.sheet.desenhar(this.x, this.y);
+    },
+    atirar: function() {
+        var t = new Tiro(this.context, this, window.imgFolha);
+        this.animacao.novoSprite(t);
     }
 }

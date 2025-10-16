@@ -6,6 +6,7 @@ function Animacao(context) {
 Animacao.prototype = {
    novoSprite: function(sprite) {
       this.sprites.push(sprite);
+      sprite.animacao = this;
    },
    ligar: function() {
       this.ligado = true;
@@ -40,3 +41,4 @@ Animacao.prototype = {
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
    }
 }
+
