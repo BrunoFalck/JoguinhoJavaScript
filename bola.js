@@ -45,6 +45,7 @@ Bola.prototype = {
       }]
    },
    colidiuCom: function(sprite) {
+      
       alert('colidiu');
    }
 }
