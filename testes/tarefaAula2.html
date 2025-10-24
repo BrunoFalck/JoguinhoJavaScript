@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarefa da aula 2</title>
+</head>
+<body>
+    <canvas id="meu_canvas" width="1000" height="1000"></canvas>
+
+    <script>
+
+        var canvas = document.getElementById('meu_canvas');
+        var context = canvas.getContext('2d')
+
+        //quadrado
+        context.fillStyle = 'pink';
+        context.fillRect(400, 100, 100, 100);
+        context.lineWidth = 3;
+        context.strokeStyle = 'orange';
+        context.strokeRect(400, 100, 100, 100);
+
+        //estrela
+        context.beginPath();
+
+        context.moveTo(75,250);
+        context.lineTo(150, 50);
+        context.lineTo(225, 250);
+        context.lineTo(50, 120);
+        context.lineTo(250, 120);
+        context.lineTo(75, 250);
+
+        context.lineWidth = 2;
+        context.strokeStyle = 'green';
+
+        context.stroke();
+
+        //infinito
+        context.beginPath();
+
+        context.arc(
+            240,
+            50,
+            40,
+            Math.PI/2,
+            3*Math.PI/2,
+            false
+        );
+        
+        context.arc(
+            340,
+            50,
+            40,
+            Math.PI/2,
+            3*Math.PI/2,
+            true
+        );
+        context.fillStyle = 'yellow';
+        context.lineWidth = 3;
+        context.strokeStyle = 'black';
+        context.stroke();
+        context.fill();
+    </script>
+</body>
+</html>

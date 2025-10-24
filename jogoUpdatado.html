@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Bulba no Fundo Parallax</title>
+    <script src="animacao.js"></script>
+    <script src="fundo.js"></script>
+    <script src="bulba.js"></script>
+    <script src="teclado.js"></script>
+    <script src="spritesheet.js"></script>
+    <script src="tiro.js"></script>
+    <script src="colisor.js"></script>
+    <script src="patrat.js"></script>
+</head>
+
+<body>
+    <canvas id="canvas_jogo" width="500" height="500"></canvas>
+    <script>
+        var canvas = document.getElementById('canvas_jogo');
+        var context = canvas.getContext('2d');
+        var animacao;
+        var teclado;
+        var bulba;
+        var imgPatrat = new Image();
+        imgPatrat.src = "img/patrat_spritesheet.png";
+
+        var imgEspaco = new Image();
+        imgEspaco.src = 'img/testefundo.png';
+
+        var imgEstrelas = new Image();
+        imgEstrelas.src = 'img/folhas.png';
+
+        var imgNuvens = new Image();
+        imgNuvens.src = 'img/fundo-nuvens.png';
+
+        var imgBulba = new Image();
+        imgBulba.src = 'img/bulba_spritesheet.png';
+
+        var colisor = new Colisor();
+
+        var carregadas = 0;
+
+        var imgFolha = new Image();
+        imgFolha.src = 'img/folha.png';
+        window.imgFolha = imgFolha; // Tornar imgFolha acessível globalmente
+        var total = 6; 
+
+        imgFolha.onload = carregando;
+        imgEspaco.onload = carregando;
+        imgEstrelas.onload = carregando;
+        imgNuvens.onload = carregando;
+        imgBulba.onload = carregando;
+        imgPatrat.onload = carregando;
+
+        function carregando() {
+            carregadas++;
+            if (carregadas == total) iniciar();
+        }
+
+        function novoPatrat() {
+        var patrat = new Patrat(context, imgPatrat);
+        patrat.velocidade = Math.floor(5 + Math.random() * (20-5*1));
+
+        var frameWidth = imgPatrat.width / 4; // Supondo 4 quadros na largura
+        var frameHeight = imgPatrat.height;   // Supondo 1 quadro na
+
+        patrat.x = Math.random() * (canvas.width - frameWidth + 1);
+        patrat.y = -frameHeight;
+
+        animacao.novoSprite(patrat);
+        colisor.novoSprite(patrat);
+    }
+
+        function iniciar() {
+            teclado = new Teclado(document);
+            animacao = new Animacao(context);
+
+            // Fundos parallax
+            var fundoEspaco = new Fundo(context, imgEspaco);
+            var fundoEstrelas = new Fundo(context, imgEstrelas);
+            var fundoNuvens = new Fundo(context, imgNuvens);
+
+            fundoEspaco.velocidade = 3;
+            fundoEstrelas.velocidade = 7;
+            fundoNuvens.velocidade = 10;
+
+            // Personagem
+            bulba = new Bulba(context, teclado, imgBulba);
+            window.bulba = bulba; // Tornar bulba acessível globalmente
+            bulba.x = canvas.width / 2 - imgBulba.width / 8; // Ajuste para centralizar
+            bulba.y = canvas.height - imgBulba.height / 1;   // Ajuste para base
+            bulba.velocidade = 5;
+            bulba.animacao = animacao;
+            
+
+            // Ordem de desenho: fundos primeiro, personagem por cima
+            animacao.novoSprite(fundoEspaco);
+            animacao.novoSprite(fundoEstrelas);
+            animacao.novoSprite(fundoNuvens);
+            animacao.novoSprite(bulba);
+            colisor.novoSprite(bulba);
+            
+            teclado.disparou(ESPACO, function() {
+                bulba.atirar();
+            });
+            setInterval(novoPatrat, 1000);
+            animacao.ligar();
+        }
+
+    </script>
+</body>
+</html>

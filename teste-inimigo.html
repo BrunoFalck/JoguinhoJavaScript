@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="animacao.js"></script>
+    <script src="teclado.js"></script>
+    <script src="bulba.js"></script>
+    <script src="tiro.js"></script>
+    <script src="colisor.js"></script>
+    <script src="patrat.js"></script>
+    <script src="spritesheet.js"></script> 
+
+</head>
+<body>
+<canvas id = "canvas_inimigos" width="500" height="500"></canvas>
+
+<script>
+    var canvas = document.getElementById("canvas_inimigos");
+    var context = canvas.getContext("2d");
+
+    var teclado = new Teclado(document);
+    var animacao = new Animacao(context);
+
+    var imgBulba = new Image();
+    imgBulba.src = "img/bulba_spritesheet.png";
+    imgBulba.onload = carregando;
+
+    var imgPatrat = new Image();
+    imgPatrat.src = "img/patrat_spritesheet.png";
+    imgPatrat.onload = carregando;
+
+    var bulba = new Bulba(context, teclado, imgBulba);
+    animacao.novoSprite(bulba);
+
+    var colisor = new Colisor();
+    colisor.novoSprite(bulba);
+
+    teclado.disparou(ESPACO, function(){
+        bulba.atirar();
+    });
+
+    
+
+    var carregadas = 0;
+
+    function carregando() {
+        carregadas++;
+        if (carregadas == 2) iniciar();
+    }
+
+    function iniciar() {
+        bulba.x = canvas.width / 2 - imgBulba.width / 2;
+        bulba.y = canvas.height - imgBulba.height;
+        bulba.velocidade = 5;
+        animacao.ligar();
+
+        setInterval(novoPatrat, 1000);
+    }
+
+    function novoPatrat() {
+        var patrat = new Patrat(context, imgPatrat);
+        patrat.velocidade = Math.floor(5 + Math.random() * (20-5*1));
+
+        patrat.x = Math.random() * (canvas.width - imgPatrat.width + 1);
+        patrat.y = -imgPatrat.height;
+
+        animacao.novoSprite(patrat);
+        colisor.novoSprite(patrat);
+    }
+</script>
+
+</body>
+</html>

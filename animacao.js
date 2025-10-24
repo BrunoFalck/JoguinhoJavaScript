@@ -22,6 +22,8 @@ Animacao.prototype = {
       // A cada ciclo, limpamos a tela ou desenhamos um fundo
       this.limparTela();
 
+    
+
       // Atualizamos o estado dos sprites
       for (var i in this.sprites)
          this.sprites[i].atualizar();

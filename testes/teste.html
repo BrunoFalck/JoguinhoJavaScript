@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="meu_canvas" width="500" height="500"></canvas>
+    <script>
+        var canvas = document.getElementById('meu_canvas');
+        var context = canvas.getContext('2d');
+
+        var x = 20;
+        var y = 100;
+        var raio = 20;
+        var anterior = new Date().getTime();
+        
+        requestAnimationFrame(mexerBola);
+        function mexerBola(){
+            var agora = new Date().getTime();
+            
+            var decorrido = agora - anterior;
+            var velocidade = 200;
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.fillStyle = 'blue';
+            context.beginPath();
+            context.arc(x, y, raio, 0, 2 * Math.PI);
+            context.fill();
+
+            x += (velocidade * decorrido / 1000);
+
+            requestAnimationFrame(mexerBola);
+        }
+    </script>
+</body>
+</html>
