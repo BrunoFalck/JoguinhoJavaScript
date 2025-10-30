@@ -17,5 +17,11 @@ Patrat.prototype = {
     },
     desenhar: function() {
         this.sheet.desenhar(this.x, this.y);
+    },
+    retangulosColisao: function() {
+        return [{ x: this.x, y: this.y, largura: 29, altura: 29 }];
+    },
+    colidiuCom: function(outro) {
+        
     }
 }

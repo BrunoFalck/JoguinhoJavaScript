@@ -47,5 +47,12 @@ Bulba.prototype = {
     atirar: function() {
         var t = new Tiro(this.context, this, window.imgFolha);
         this.animacao.novoSprite(t);
+        this.colisor.novoSprite(t);
+    },
+    retangulosColisao: function() {
+        return [{ x: this.x, y: this.y, largura: 51, altura: 59 }];
+    },
+    colidiuCom: function(outro) {
+
     }
 }

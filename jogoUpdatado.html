@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <canvas id="canvas_jogo" width="500" height="500"></canvas>
+    <canvas id="canvas_jogo" width="500" height="800" style="padding-left: 30%;"></canvas>
     <script>
         var canvas = document.getElementById('canvas_jogo');
         var context = canvas.getContext('2d');
@@ -59,7 +59,7 @@
 
         function novoPatrat() {
         var patrat = new Patrat(context, imgPatrat);
-        patrat.velocidade = Math.floor(5 + Math.random() * (20-5*1));
+        patrat.velocidade = Math.floor(5 + Math.random() * (7-5*1));
 
         var frameWidth = imgPatrat.width / 4; // Supondo 4 quadros na largura
         var frameHeight = imgPatrat.height;   // Supondo 1 quadro na
@@ -99,6 +99,7 @@
             animacao.novoSprite(fundoNuvens);
             animacao.novoSprite(bulba);
             colisor.novoSprite(bulba);
+            animacao.novoProcessamento(colisor);
             
             teclado.disparou(ESPACO, function() {
                 bulba.atirar();

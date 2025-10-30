@@ -2,6 +2,7 @@ function Animacao(context) {
    this.context = context;
    this.sprites = [];
    this.ligado = false;
+   this.processamentos = [];
 }
 Animacao.prototype = {
    novoSprite: function(sprite) {
@@ -32,6 +33,9 @@ Animacao.prototype = {
       for (var i in this.sprites)
          this.sprites[i].desenhar();
 
+      for (var i in this.processamentos)
+         this.processamentos[i].processar();
+
       // Chamamos o próximo ciclo
       var animacao = this;
       requestAnimationFrame(function() {
@@ -41,6 +45,10 @@ Animacao.prototype = {
    limparTela: function() {
       var ctx = this.context;
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+   },
+   novoProcessamento: function(processamento) {
+      this.processamentos.push(processamento);
+      processamento.animacao = this;
    }
 }
 

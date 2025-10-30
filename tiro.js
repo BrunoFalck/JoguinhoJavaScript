@@ -21,5 +21,11 @@ Tiro.prototype = {
         ctx.rotate(this.angulo);
         ctx.drawImage(this.imagem, -this.largura / 2, -this.altura / 2, this.largura, this.altura);
         ctx.restore();
+    },
+    retangulosColisao: function() {
+        return [{ x: this.x, y: this.y, largura: this.largura, altura: this.altura }];
+    },
+    colidiuCom: function(outro) {
+        
     }
 }
