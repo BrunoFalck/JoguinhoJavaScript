@@ -13,6 +13,10 @@ function Patrat(context, imagem) {
 Patrat.prototype = {
     atualizar: function() {
         this.y += this.velocidade;
+        if (this.y > this.context.canvas.height) {
+            this.animacao.excluirSprite(this);
+            this.colisor.excluirSprite(this);
+        }
         this.sheet.proximoQuadro();
     },
     desenhar: function() {
@@ -22,6 +26,11 @@ Patrat.prototype = {
         return [{ x: this.x, y: this.y, largura: 29, altura: 29 }];
     },
     colidiuCom: function(outro) {
-        
+        if (outro instanceof Tiro) {
+            this.animacao.excluirSprite(this);
+            this.colisor.excluirSprite(this);
+            this.animacao.excluirSprite(outro);
+            this.colisor.excluirSprite(outro);
+        }
     }
 }

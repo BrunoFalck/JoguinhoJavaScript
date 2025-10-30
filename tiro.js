@@ -12,6 +12,10 @@ function Tiro(context, bulba, imagem)  {
 Tiro.prototype = {
     atualizar: function() {
         this.y -= this.velocidade;
+        if (this.y < -this.altura) {
+            this.animacao.excluirSprite(this);
+            this.colisor.excluirSprite(this);
+        }
         this.angulo += 0.2; // Faz a folha rodar
     },
     desenhar: function() {
@@ -23,9 +27,10 @@ Tiro.prototype = {
         ctx.restore();
     },
     retangulosColisao: function() {
-        return [{ x: this.x, y: this.y, largura: this.largura, altura: this.altura }];
+        return [{ x: this.x, y: this.y, largura: this.largura + 5, altura: this.altura }];
     },
     colidiuCom: function(outro) {
-        
-    }
+        if (outro instanceof Patrat) {
+        }
+    }   
 }

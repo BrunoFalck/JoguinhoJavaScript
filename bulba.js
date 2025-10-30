@@ -53,6 +53,9 @@ Bulba.prototype = {
         return [{ x: this.x, y: this.y, largura: 51, altura: 59 }];
     },
     colidiuCom: function(outro) {
-
+        if (outro instanceof Patrat) {
+            this.animacao.desligar();
+            alert("Perdeste!");
+        }
     }
 }
